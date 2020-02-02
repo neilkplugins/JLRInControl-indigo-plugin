@@ -1,0 +1,888 @@
+<?xml version="1.0"?>
+<Devices>
+	<!-- Define some devices -->
+	<Device type="custom" id="JLRcar">
+		<Name>Jaguar/Land Rover Car</Name>
+		<ConfigUI>
+			<Field id="CarID" type="menu" >
+			<List class="self" method="genVehicleList"/>
+			</Field>
+			<Field id="label" type="label" fontSize="small" fontColor="darkgray">
+				<Label>Select the vehicle number if the account has multiple cars. VIN sent to Indigo Log so you can identify the correct car</Label>
+			</Field>
+		</ConfigUI>
+		<States>
+			<State id="geoaddress">
+				<ValueType>String</ValueType>
+                <TriggerLabel>geoaddress</TriggerLabel>
+                <ControlPageLabel>geoaddress</ControlPageLabel>
+            </State>
+			<State id="longitude">
+				<ValueType>String</ValueType>
+                <TriggerLabel>longitude</TriggerLabel>
+                <ControlPageLabel>longitude</ControlPageLabel>
+            </State>
+            <State id="latitude">
+				<ValueType>String</ValueType>
+                <TriggerLabel>latitude</TriggerLabel>
+                <ControlPageLabel>latitude</ControlPageLabel>
+            </State>
+            <State id="heading">
+				<ValueType>String</ValueType>
+                <TriggerLabel>heading</TriggerLabel>
+                <ControlPageLabel>heading</ControlPageLabel>
+            </State>
+            <State id="speed">
+				<ValueType>String</ValueType>
+                <TriggerLabel>speed</TriggerLabel>
+                <ControlPageLabel>speed</ControlPageLabel>
+            </State>
+			<State id="bodyType">
+				<ValueType>String</ValueType>
+                <TriggerLabel>bodyType</TriggerLabel>
+                <ControlPageLabel>bodyType</ControlPageLabel>
+            </State>
+            <State id="registrationNumber">
+				<ValueType>String</ValueType>
+                <TriggerLabel>registrationNumber</TriggerLabel>
+                <ControlPageLabel>registrationNumber</ControlPageLabel>
+            </State>
+			<State id="modelYear">
+				<ValueType>String</ValueType>
+                <TriggerLabel>modelYear</TriggerLabel>
+                <ControlPageLabel>modelYear</ControlPageLabel>
+            </State>
+            <State id="vehicleBrand">
+				<ValueType>String</ValueType>
+                <TriggerLabel>vehicleBrand</TriggerLabel>
+                <ControlPageLabel>vehicleBrand</ControlPageLabel>
+            </State>
+            <State id="fuelType">
+				<ValueType>String</ValueType>
+                <TriggerLabel>fuelType</TriggerLabel>
+                <ControlPageLabel>fuelType</ControlPageLabel>
+            </State>
+            <State id="vehicleType">
+				<ValueType>String</ValueType>
+                <TriggerLabel>vehicleType</TriggerLabel>
+                <ControlPageLabel>vehicleType</ControlPageLabel>
+            </State>
+            <State id="nickname">
+				<ValueType>String</ValueType>
+                <TriggerLabel>nickname</TriggerLabel>
+                <ControlPageLabel>nickname</ControlPageLabel>
+            </State>
+            <State id="exteriorColorName">
+				<ValueType>String</ValueType>
+                <TriggerLabel>exteriorColorName</TriggerLabel>
+                <ControlPageLabel>exteriorColorName</ControlPageLabel>
+            </State>
+            <State id="deviceIsOnline">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>Device Online?</TriggerLabel>
+                <ControlPageLabel>Device Online?</ControlPageLabel>
+            </State>
+
+            <State id="deviceLastUpdated">
+                <ValueType>String</ValueType>
+                <TriggerLabel>Device Last Updated</TriggerLabel>
+                <ControlPageLabel>Device Last Updated</ControlPageLabel>
+            </State>
+
+            <State id="deviceTimestamp">
+                <ValueType>Integer</ValueType>
+                <TriggerLabel>Device Timestamp</TriggerLabel>
+                <ControlPageLabel>Device Timestamp</ControlPageLabel>
+            </State>
+
+            <State id="parse_error">
+                <ValueType>Boolean</ValueType>
+                <TriggerLabel>Parse Error</TriggerLabel>
+                <ControlPageLabel>Parse Error</ControlPageLabel>
+            </State>
+<State id="EV_NEXT_DEPARTURE_TIMER_IS_SET">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>EV_NEXT_DEPARTURE_TIMER_IS_SET</TriggerLabel>
+    <ControlPageLabel>EV_NEXT_DEPARTURE_TIMER_IS_SET</ControlPageLabel>
+</State>
+<State id="TU_STATUS_PRIMARY_VOLT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_PRIMARY_VOLT</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_PRIMARY_VOLT</ControlPageLabel>
+</State>
+<State id="TU_STATUS_PRIMARY_CHARGE_PERCENT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_PRIMARY_CHARGE_PERCENT</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_PRIMARY_CHARGE_PERCENT</ControlPageLabel>
+</State>
+<State id="EV_RANGE_ON_BATTERY_MILES">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_ON_BATTERY_MILES</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_ON_BATTERY_MILES</ControlPageLabel>
+</State>
+<State id="DOOR_IS_ALL_DOORS_LOCKED">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_IS_ALL_DOORS_LOCKED</TriggerLabel>
+    <ControlPageLabel>DOOR_IS_ALL_DOORS_LOCKED</ControlPageLabel>
+</State>
+<State id="TU_STATUS_GSM_MODEM">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_GSM_MODEM</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_GSM_MODEM</ControlPageLabel>
+</State>
+<State id="EV_RANGE_COMFORTx10">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_COMFORTx10</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_COMFORTx10</ControlPageLabel>
+</State>
+<State id="EV_CHARGING_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_CHARGING_STATUS</TriggerLabel>
+    <ControlPageLabel>EV_CHARGING_STATUS</ControlPageLabel>
+</State>
+<State id="EV_IS_PLUGGED_IN">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_IS_PLUGGED_IN</TriggerLabel>
+    <ControlPageLabel>EV_IS_PLUGGED_IN</ControlPageLabel>
+</State>
+<State id="EV_CHARGING_METHOD">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_CHARGING_METHOD</TriggerLabel>
+    <ControlPageLabel>EV_CHARGING_METHOD</ControlPageLabel>
+</State>
+<State id="TU_STATUS_IMEI">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_IMEI</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_IMEI</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER1_DAY">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER1_DAY</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER1_DAY</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_VEH_ACCEL_FACTOR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_VEH_ACCEL_FACTOR</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_VEH_ACCEL_FACTOR</ControlPageLabel>
+</State>
+<State id="BATTERY_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>BATTERY_STATUS</TriggerLabel>
+    <ControlPageLabel>BATTERY_STATUS</ControlPageLabel>
+</State>
+<State id="EV_PERMANENT_MAX_SOC_CHARGE_SETTING_CHOICE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_PERMANENT_MAX_SOC_CHARGE_SETTING_CHOICE</TriggerLabel>
+    <ControlPageLabel>EV_PERMANENT_MAX_SOC_CHARGE_SETTING_CHOICE</ControlPageLabel>
+</State>
+<State id="WASHER_FLUID_WARN">
+    <ValueType>String</ValueType>
+    <TriggerLabel>WASHER_FLUID_WARN</TriggerLabel>
+    <ControlPageLabel>WASHER_FLUID_WARN</ControlPageLabel>
+</State>
+<State id="DOOR_FRONT_LEFT_POSITION">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_FRONT_LEFT_POSITION</TriggerLabel>
+    <ControlPageLabel>DOOR_FRONT_LEFT_POSITION</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_REGEN_ENERGY_AVAILABLEx100">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_REGEN_ENERGY_AVAILABLEx100</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_REGEN_ENERGY_AVAILABLEx100</ControlPageLabel>
+</State>
+<State id="EV_NEXT_DEPARTURE_TIMER_TIME_HOUR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_NEXT_DEPARTURE_TIMER_TIME_HOUR</TriggerLabel>
+    <ControlPageLabel>EV_NEXT_DEPARTURE_TIMER_TIME_HOUR</ControlPageLabel>
+</State>
+<State id="TU_STATUS_SLEEP_CYCLES_START_TIME">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_SLEEP_CYCLES_START_TIME</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_SLEEP_CYCLES_START_TIME</ControlPageLabel>
+</State>
+<State id="DOOR_REAR_RIGHT_POSITION">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_REAR_RIGHT_POSITION</TriggerLabel>
+    <ControlPageLabel>DOOR_REAR_RIGHT_POSITION</ControlPageLabel>
+</State>
+<State id="TU_STATUS_GNSS_ANTENNA">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_GNSS_ANTENNA</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_GNSS_ANTENNA</ControlPageLabel>
+</State>
+<State id="EV_CHARGING_RATE_KM_PER_HOUR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_CHARGING_RATE_KM_PER_HOUR</TriggerLabel>
+    <ControlPageLabel>EV_CHARGING_RATE_KM_PER_HOUR</ControlPageLabel>
+</State>
+<State id="ENGINE_COOLANT_TEMP">
+    <ValueType>String</ValueType>
+    <TriggerLabel>ENGINE_COOLANT_TEMP</TriggerLabel>
+    <ControlPageLabel>ENGINE_COOLANT_TEMP</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_RANGE_MAP_REFACTR_COMF">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_RANGE_MAP_REFACTR_COMF</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_RANGE_MAP_REFACTR_COMF</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD1">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD1</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD1</ControlPageLabel>
+</State>
+<State id="DISTANCE_TO_EMPTY_FUEL">
+    <ValueType>String</ValueType>
+    <TriggerLabel>DISTANCE_TO_EMPTY_FUEL</TriggerLabel>
+    <ControlPageLabel>DISTANCE_TO_EMPTY_FUEL</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_REMAINING_RUNTIME">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_REMAINING_RUNTIME</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_REMAINING_RUNTIME</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD2">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD2</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD2</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD3">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD3</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD3</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD4">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD4</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD4</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD5">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD5</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD5</ControlPageLabel>
+</State>
+<State id="ODOMETER_MILES_RESOLUTION">
+    <ValueType>String</ValueType>
+    <TriggerLabel>ODOMETER_MILES_RESOLUTION</TriggerLabel>
+    <ControlPageLabel>ODOMETER_MILES_RESOLUTION</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD6">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD6</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD6</ControlPageLabel>
+</State>
+<State id="SERVICE_MODE_START">
+    <ValueType>String</ValueType>
+    <TriggerLabel>SERVICE_MODE_START</TriggerLabel>
+    <ControlPageLabel>SERVICE_MODE_START</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD7">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD7</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD7</ControlPageLabel>
+</State>
+<State id="TYRE_STATUS_REAR_LEFT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TYRE_STATUS_REAR_LEFT</TriggerLabel>
+    <ControlPageLabel>TYRE_STATUS_REAR_LEFT</ControlPageLabel>
+</State>
+<State id="ODOMETER_MILES">
+    <ValueType>String</ValueType>
+    <TriggerLabel>ODOMETER_MILES</TriggerLabel>
+    <ControlPageLabel>ODOMETER_MILES</ControlPageLabel>
+</State>
+<State id="TU_STATUS_SECONDARY_VOLT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_SECONDARY_VOLT</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_SECONDARY_VOLT</ControlPageLabel>
+</State>
+<State id="EV_STATE_OF_CHARGE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_STATE_OF_CHARGE</TriggerLabel>
+    <ControlPageLabel>EV_STATE_OF_CHARGE</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_REVISED_HV_BATT_ENERGYx100">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_REVISED_HV_BATT_ENERGYx100</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_REVISED_HV_BATT_ENERGYx100</ControlPageLabel>
+</State>
+<State id="SRS_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>SRS_STATUS</TriggerLabel>
+    <ControlPageLabel>SRS_STATUS</ControlPageLabel>
+</State>
+<State id="DOOR_REAR_RIGHT_LOCK_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_REAR_RIGHT_LOCK_STATUS</TriggerLabel>
+    <ControlPageLabel>DOOR_REAR_RIGHT_LOCK_STATUS</ControlPageLabel>
+</State>
+<State id="EV_NEXT_DEPARTURE_TIMER_DATE_YEAR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_NEXT_DEPARTURE_TIMER_DATE_YEAR</TriggerLabel>
+    <ControlPageLabel>EV_NEXT_DEPARTURE_TIMER_DATE_YEAR</ControlPageLabel>
+</State>
+<State id="IS_PANIC_ALARM_TRIGGERED">
+    <ValueType>String</ValueType>
+    <TriggerLabel>IS_PANIC_ALARM_TRIGGERED</TriggerLabel>
+    <ControlPageLabel>IS_PANIC_ALARM_TRIGGERED</ControlPageLabel>
+</State>
+<State id="EV_IS_CHARGING">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_IS_CHARGING</TriggerLabel>
+    <ControlPageLabel>EV_IS_CHARGING</ControlPageLabel>
+</State>
+<State id="DOOR_FRONT_RIGHT_POSITION">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_FRONT_RIGHT_POSITION</TriggerLabel>
+    <ControlPageLabel>DOOR_FRONT_RIGHT_POSITION</ControlPageLabel>
+</State>
+<State id="BRAKE_FLUID_WARN">
+    <ValueType>String</ValueType>
+    <TriggerLabel>BRAKE_FLUID_WARN</TriggerLabel>
+    <ControlPageLabel>BRAKE_FLUID_WARN</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_ENERGY_TIME_PENx100">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_ENERGY_TIME_PENx100</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_ENERGY_TIME_PENx100</ControlPageLabel>
+</State>
+<State id="DOOR_REAR_LEFT_LOCK_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_REAR_LEFT_LOCK_STATUS</TriggerLabel>
+    <ControlPageLabel>DOOR_REAR_LEFT_LOCK_STATUS</ControlPageLabel>
+</State>
+<State id="TU_STATUS_MOBILE_PHONE_CONNECTED">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>TU_STATUS_MOBILE_PHONE_CONNECTED</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_MOBILE_PHONE_CONNECTED</ControlPageLabel>
+</State>
+<State id="EV_PRECONDITION_PRIORITY_SETTING">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_PRECONDITION_PRIORITY_SETTING</TriggerLabel>
+    <ControlPageLabel>EV_PRECONDITION_PRIORITY_SETTING</ControlPageLabel>
+</State>
+<State id="TU_STATUS_SW_VERSION_CONFIG">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_SW_VERSION_CONFIG</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_SW_VERSION_CONFIG</ControlPageLabel>
+</State>
+<State id="EXT_OIL_LEVEL_WARN">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EXT_OIL_LEVEL_WARN</TriggerLabel>
+    <ControlPageLabel>EXT_OIL_LEVEL_WARN</ControlPageLabel>
+</State>
+<State id="TU_STATUS_MIC">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_MIC</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_MIC</ControlPageLabel>
+</State>
+<State id="EV_BATTERY_PRECONDITIONING_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_BATTERY_PRECONDITIONING_STATUS</TriggerLabel>
+    <ControlPageLabel>EV_BATTERY_PRECONDITIONING_STATUS</ControlPageLabel>
+</State>
+<State id="TU_STATUS_POWER">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_POWER</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_POWER</ControlPageLabel>
+</State>
+<State id="DOOR_ENGINE_HOOD_POSITION">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_ENGINE_HOOD_POSITION</TriggerLabel>
+    <ControlPageLabel>DOOR_ENGINE_HOOD_POSITION</ControlPageLabel>
+</State>
+<State id="EV_NEXT_DEPARTURE_TIMER_DATE_DAY">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_NEXT_DEPARTURE_TIMER_DATE_DAY</TriggerLabel>
+    <ControlPageLabel>EV_NEXT_DEPARTURE_TIMER_DATE_DAY</ControlPageLabel>
+</State>
+<State id="TRANSPORT_MODE_START">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TRANSPORT_MODE_START</TriggerLabel>
+    <ControlPageLabel>TRANSPORT_MODE_START</ControlPageLabel>
+</State>
+<State id="EXT_BULB_STATUS_LEFT_TURN_ANY">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EXT_BULB_STATUS_LEFT_TURN_ANY</TriggerLabel>
+    <ControlPageLabel>EXT_BULB_STATUS_LEFT_TURN_ANY</ControlPageLabel>
+</State>
+<State id="ENG_COOLANT_LEVEL_WARN">
+    <ValueType>String</ValueType>
+    <TriggerLabel>ENG_COOLANT_LEVEL_WARN</TriggerLabel>
+    <ControlPageLabel>ENG_COOLANT_LEVEL_WARN</ControlPageLabel>
+</State>
+<State id="EV_PHEV_RANGE_COMBINED_KM">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_PHEV_RANGE_COMBINED_KM</TriggerLabel>
+    <ControlPageLabel>EV_PHEV_RANGE_COMBINED_KM</ControlPageLabel>
+</State>
+<State id="WINDOW_FRONT_RIGHT_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>WINDOW_FRONT_RIGHT_STATUS</TriggerLabel>
+    <ControlPageLabel>WINDOW_FRONT_RIGHT_STATUS</ControlPageLabel>
+</State>
+<State id="WINDOW_REAR_RIGHT_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>WINDOW_REAR_RIGHT_STATUS</TriggerLabel>
+    <ControlPageLabel>WINDOW_REAR_RIGHT_STATUS</ControlPageLabel>
+</State>
+<State id="TU_STATUS_INT_RTC">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_INT_RTC</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_INT_RTC</ControlPageLabel>
+</State>
+<State id="TYRE_STATUS_FRONT_LEFT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TYRE_STATUS_FRONT_LEFT</TriggerLabel>
+    <ControlPageLabel>TYRE_STATUS_FRONT_LEFT</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_RANGE_MAP_REFACTR_ECO">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_RANGE_MAP_REFACTR_ECO</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_RANGE_MAP_REFACTR_ECO</ControlPageLabel>
+</State>
+<State id="THEFT_ALARM_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>THEFT_ALARM_STATUS</TriggerLabel>
+    <ControlPageLabel>THEFT_ALARM_STATUS</ControlPageLabel>
+</State>
+<State id="IS_SUNROOF_OPEN">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>IS_SUNROOF_OPEN</TriggerLabel>
+    <ControlPageLabel>IS_SUNROOF_OPEN</ControlPageLabel>
+</State>
+<State id="EV_MINUTES_TO_BULK_CHARGED">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_MINUTES_TO_BULK_CHARGED</TriggerLabel>
+    <ControlPageLabel>EV_MINUTES_TO_BULK_CHARGED</ControlPageLabel>
+</State>
+<State id="ODOMETER">
+    <ValueType>String</ValueType>
+    <TriggerLabel>ODOMETER</TriggerLabel>
+    <ControlPageLabel>ODOMETER</ControlPageLabel>
+</State>
+<State id="EXT_KILOMETERS_TO_SERVICE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EXT_KILOMETERS_TO_SERVICE</TriggerLabel>
+    <ControlPageLabel>EXT_KILOMETERS_TO_SERVICE</ControlPageLabel>
+</State>
+<State id="TU_STATUS_DAYS_SINCE_GNSS_FIX">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_DAYS_SINCE_GNSS_FIX</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_DAYS_SINCE_GNSS_FIX</ControlPageLabel>
+</State>
+<State id="TU_STATUS_BUTTONS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_BUTTONS</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_BUTTONS</ControlPageLabel>
+</State>
+<State id="EV_CHARGING_MODE_CHOICE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_CHARGING_MODE_CHOICE</TriggerLabel>
+    <ControlPageLabel>EV_CHARGING_MODE_CHOICE</ControlPageLabel>
+</State>
+<State id="VEHICLE_STATE_TYPE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>VEHICLE_STATE_TYPE</TriggerLabel>
+    <ControlPageLabel>VEHICLE_STATE_TYPE</ControlPageLabel>
+</State>
+<State id="DOOR_ENGINE_HOOD_LOCK_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_ENGINE_HOOD_LOCK_STATUS</TriggerLabel>
+    <ControlPageLabel>DOOR_ENGINE_HOOD_LOCK_STATUS</ControlPageLabel>
+</State>
+<State id="TYRE_STATUS_FRONT_RIGHT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TYRE_STATUS_FRONT_RIGHT</TriggerLabel>
+    <ControlPageLabel>TYRE_STATUS_FRONT_RIGHT</ControlPageLabel>
+</State>
+<State id="PRIVACY_SWITCH">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>PRIVACY_SWITCH</TriggerLabel>
+    <ControlPageLabel>PRIVACY_SWITCH</ControlPageLabel>
+</State>
+<State id="TU_STATUS_EXT_POWER">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_EXT_POWER</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_EXT_POWER</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER1_MINUTE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER1_MINUTE</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER1_MINUTE</ControlPageLabel>
+</State>
+<State id="LATEST_COMPLETE_CONFIG_UPDATE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>LATEST_COMPLETE_CONFIG_UPDATE</TriggerLabel>
+    <ControlPageLabel>LATEST_COMPLETE_CONFIG_UPDATE</ControlPageLabel>
+</State>
+<State id="EV_ENERGY_CONSUMED_LAST_CHARGE_KWH">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_ENERGY_CONSUMED_LAST_CHARGE_KWH</TriggerLabel>
+    <ControlPageLabel>EV_ENERGY_CONSUMED_LAST_CHARGE_KWH</ControlPageLabel>
+</State>
+<State id="TU_STATUS_HANDSET">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_HANDSET</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_HANDSET</ControlPageLabel>
+</State>
+<State id="EV_PHEV_RANGE_COMBINED_MILES">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_PHEV_RANGE_COMBINED_MILES</TriggerLabel>
+    <ControlPageLabel>EV_PHEV_RANGE_COMBINED_MILES</ControlPageLabel>
+</State>
+<State id="BRAZIL_EVENT_MODE">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>BRAZIL_EVENT_MODE</TriggerLabel>
+    <ControlPageLabel>BRAZIL_EVENT_MODE</ControlPageLabel>
+</State>
+<State id="EV_RANGE_ON_BATTERY_KM">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_ON_BATTERY_KM</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_ON_BATTERY_KM</ControlPageLabel>
+</State>
+<State id="IS_CRASH_SITUATION">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>IS_CRASH_SITUATION</TriggerLabel>
+    <ControlPageLabel>IS_CRASH_SITUATION</ControlPageLabel>
+</State>
+<State id="DOOR_FRONT_RIGHT_LOCK_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_FRONT_RIGHT_LOCK_STATUS</TriggerLabel>
+    <ControlPageLabel>DOOR_FRONT_RIGHT_LOCK_STATUS</ControlPageLabel>
+</State>
+<State id="EV_RANGE_PREDICT_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_PREDICT_STATUS</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_PREDICT_STATUS</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_INITIAL_HV_BATT_ENERGYx100">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_INITIAL_HV_BATT_ENERGYx100</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_INITIAL_HV_BATT_ENERGYx100</ControlPageLabel>
+</State>
+<State id="TYRE_PRESSURE_REAR_RIGHT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TYRE_PRESSURE_REAR_RIGHT</TriggerLabel>
+    <ControlPageLabel>TYRE_PRESSURE_REAR_RIGHT</ControlPageLabel>
+</State>
+<State id="TU_STATUS_CONFIG_VERSION">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_CONFIG_VERSION</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_CONFIG_VERSION</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER2_DAY">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER2_DAY</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER2_DAY</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_ENERGY_DESCENTx10">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_ENERGY_DESCENTx10</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_ENERGY_DESCENTx10</ControlPageLabel>
+</State>
+<State id="DOOR_FRONT_LEFT_LOCK_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_FRONT_LEFT_LOCK_STATUS</TriggerLabel>
+    <ControlPageLabel>DOOR_FRONT_LEFT_LOCK_STATUS</ControlPageLabel>
+</State>
+<State id="EV_NEXT_DEPARTURE_TIMER_TIME_MINUTE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_NEXT_DEPARTURE_TIMER_TIME_MINUTE</TriggerLabel>
+    <ControlPageLabel>EV_NEXT_DEPARTURE_TIMER_TIME_MINUTE</ControlPageLabel>
+</State>
+<State id="EV_ONE_OFF_MAX_SOC_CHARGE_SETTING_CHOICE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_ONE_OFF_MAX_SOC_CHARGE_SETTING_CHOICE</TriggerLabel>
+    <ControlPageLabel>EV_ONE_OFF_MAX_SOC_CHARGE_SETTING_CHOICE</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_RANGE_MAP_REFACTR_GMH">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_RANGE_MAP_REFACTR_GMH</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_RANGE_MAP_REFACTR_GMH</ControlPageLabel>
+</State>
+<State id="WINDOW_REAR_LEFT_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>WINDOW_REAR_LEFT_STATUS</TriggerLabel>
+    <ControlPageLabel>WINDOW_REAR_LEFT_STATUS</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_HV_ENERGY_ASCENTx10">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_HV_ENERGY_ASCENTx10</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_HV_ENERGY_ASCENTx10</ControlPageLabel>
+</State>
+<State id="TU_STATUS_EXT_HANDSFREE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_EXT_HANDSFREE</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_EXT_HANDSFREE</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_FFH_REMAINING_RUNTIME">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_FFH_REMAINING_RUNTIME</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_FFH_REMAINING_RUNTIME</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_VENTING_TIME">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_VENTING_TIME</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_VENTING_TIME</ControlPageLabel>
+</State>
+<State id="TYRE_PRESSURE_FRONT_RIGHT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TYRE_PRESSURE_FRONT_RIGHT</TriggerLabel>
+    <ControlPageLabel>TYRE_PRESSURE_FRONT_RIGHT</ControlPageLabel>
+</State>
+<State id="FUEL_LEVEL_PERC">
+    <ValueType>String</ValueType>
+    <TriggerLabel>FUEL_LEVEL_PERC</TriggerLabel>
+    <ControlPageLabel>FUEL_LEVEL_PERC</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER2_MONTH">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER2_MONTH</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER2_MONTH</ControlPageLabel>
+</State>
+<State id="EV_PRECONDITIONING_MODE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_PRECONDITIONING_MODE</TriggerLabel>
+    <ControlPageLabel>EV_PRECONDITIONING_MODE</ControlPageLabel>
+</State>
+<State id="DOOR_IS_BOOT_LOCKED">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_IS_BOOT_LOCKED</TriggerLabel>
+    <ControlPageLabel>DOOR_IS_BOOT_LOCKED</ControlPageLabel>
+</State>
+<State id="TU_STATUS_SW_VERSION_SECONDARY">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_SW_VERSION_SECONDARY</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_SW_VERSION_SECONDARY</ControlPageLabel>
+</State>
+<State id="EV_NEXT_DEPARTURE_TIMER_DATE_MONTH">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_NEXT_DEPARTURE_TIMER_DATE_MONTH</TriggerLabel>
+    <ControlPageLabel>EV_NEXT_DEPARTURE_TIMER_DATE_MONTH</ControlPageLabel>
+</State>
+<State id="DOOR_BOOT_POSITION">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_BOOT_POSITION</TriggerLabel>
+    <ControlPageLabel>DOOR_BOOT_POSITION</ControlPageLabel>
+</State>
+<State id="IS_HEAD_LIGHTS_ON">
+    <ValueType>String</ValueType>
+    <TriggerLabel>IS_HEAD_LIGHTS_ON</TriggerLabel>
+    <ControlPageLabel>IS_HEAD_LIGHTS_ON</ControlPageLabel>
+</State>
+<State id="TU_STATUS_CRASH_INPUT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_CRASH_INPUT</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_CRASH_INPUT</ControlPageLabel>
+</State>
+<State id="SERVICE_MODE_STOP">
+    <ValueType>String</ValueType>
+    <TriggerLabel>SERVICE_MODE_STOP</TriggerLabel>
+    <ControlPageLabel>SERVICE_MODE_STOP</ControlPageLabel>
+</State>
+<State id="TYRE_PRESSURE_FRONT_LEFT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TYRE_PRESSURE_FRONT_LEFT</TriggerLabel>
+    <ControlPageLabel>TYRE_PRESSURE_FRONT_LEFT</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER2_MINUTE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER2_MINUTE</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER2_MINUTE</ControlPageLabel>
+</State>
+<State id="IS_CAB_OPEN">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>IS_CAB_OPEN</TriggerLabel>
+    <ControlPageLabel>IS_CAB_OPEN</ControlPageLabel>
+</State>
+<State id="EV_CHARGING_RATE_MILES_PER_HOUR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_CHARGING_RATE_MILES_PER_HOUR</TriggerLabel>
+    <ControlPageLabel>EV_CHARGING_RATE_MILES_PER_HOUR</ControlPageLabel>
+</State>
+<State id="TU_STATUS_USES_EXTERNAL_GNSS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>TU_STATUS_USES_EXTERNAL_GNSS</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_USES_EXTERNAL_GNSS</ControlPageLabel>
+</State>
+<State id="ODOMETER_METER_RESOLUTION">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>ODOMETER_METER_RESOLUTION</TriggerLabel>
+    <ControlPageLabel>ODOMETER_METER_RESOLUTION</ControlPageLabel>
+</State>
+<State id="TU_STATUS_GSM_EXT_ANTENNA">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_GSM_EXT_ANTENNA</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_GSM_EXT_ANTENNA</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER2_HOUR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER2_HOUR</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER2_HOUR</ControlPageLabel>
+</State>
+<State id="ODOMETER_METER">
+    <ValueType>String</ValueType>
+    <TriggerLabel>ODOMETER_METER</TriggerLabel>
+    <ControlPageLabel>ODOMETER_METER</ControlPageLabel>
+</State>
+<State id="EV_CHARGE_NOW_SETTING">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_CHARGE_NOW_SETTING</TriggerLabel>
+    <ControlPageLabel>EV_CHARGE_NOW_SETTING</ControlPageLabel>
+</State>
+<State id="BATTERY_VOLTAGE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>BATTERY_VOLTAGE</TriggerLabel>
+    <ControlPageLabel>BATTERY_VOLTAGE</ControlPageLabel>
+</State>
+<State id="EV_PRECONDITION_OPERATING_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_PRECONDITION_OPERATING_STATUS</TriggerLabel>
+    <ControlPageLabel>EV_PRECONDITION_OPERATING_STATUS</ControlPageLabel>
+</State>
+<State id="TU_STATUS_SPEAKER">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_SPEAKER</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_SPEAKER</ControlPageLabel>
+</State>
+<State id="TRANSPORT_MODE_STOP">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TRANSPORT_MODE_STOP</TriggerLabel>
+    <ControlPageLabel>TRANSPORT_MODE_STOP</ControlPageLabel>
+</State>
+<State id="ENGINE_BLOCK">
+    <ValueType>String</ValueType>
+    <TriggerLabel>ENGINE_BLOCK</TriggerLabel>
+    <ControlPageLabel>ENGINE_BLOCK</ControlPageLabel>
+</State>
+<State id="TYRE_PRESSURE_REAR_LEFT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TYRE_PRESSURE_REAR_LEFT</TriggerLabel>
+    <ControlPageLabel>TYRE_PRESSURE_REAR_LEFT</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER_ACTIVATION_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER_ACTIVATION_STATUS</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER_ACTIVATION_STATUS</ControlPageLabel>
+</State>
+<State id="TU_STATUS_GNSS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_GNSS</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_GNSS</ControlPageLabel>
+</State>
+<State id="TU_STATUS_SW_VERSION_MAIN">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_SW_VERSION_MAIN</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_SW_VERSION_MAIN</ControlPageLabel>
+</State>
+<State id="TU_STATUS_INT_POWER">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_INT_POWER</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_INT_POWER</ControlPageLabel>
+</State>
+<State id="EV_PRECONDITION_REMAINING_RUNTIME_MINUTES">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_PRECONDITION_REMAINING_RUNTIME_MINUTES</TriggerLabel>
+    <ControlPageLabel>EV_PRECONDITION_REMAINING_RUNTIME_MINUTES</ControlPageLabel>
+</State>
+<State id="TU_STATUS_HW_VERSION">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_HW_VERSION</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_HW_VERSION</ControlPageLabel>
+</State>
+<State id="EV_MINUTES_TO_FULLY_CHARGED">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_MINUTES_TO_FULLY_CHARGED</TriggerLabel>
+    <ControlPageLabel>EV_MINUTES_TO_FULLY_CHARGED</ControlPageLabel>
+</State>
+<State id="EV_IS_PRECONDITIONING">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_IS_PRECONDITIONING</TriggerLabel>
+    <ControlPageLabel>EV_IS_PRECONDITIONING</ControlPageLabel>
+</State>
+<State id="EV_CHARGE_TYPE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_CHARGE_TYPE</TriggerLabel>
+    <ControlPageLabel>EV_CHARGE_TYPE</ControlPageLabel>
+</State>
+<State id="EV_PRECONDITION_FUEL_FIRED_HEATER_SETTING">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_PRECONDITION_FUEL_FIRED_HEATER_SETTING</TriggerLabel>
+    <ControlPageLabel>EV_PRECONDITION_FUEL_FIRED_HEATER_SETTING</ControlPageLabel>
+</State>
+<State id="WINDOW_FRONT_LEFT_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>WINDOW_FRONT_LEFT_STATUS</TriggerLabel>
+    <ControlPageLabel>WINDOW_FRONT_LEFT_STATUS</ControlPageLabel>
+</State>
+<State id="DOOR_REAR_LEFT_POSITION">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_REAR_LEFT_POSITION</TriggerLabel>
+    <ControlPageLabel>DOOR_REAR_LEFT_POSITION</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_OPERATING_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_OPERATING_STATUS</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_OPERATING_STATUS</ControlPageLabel>
+</State>
+<State id="EV_CHARGING_RATE_SOC_PER_HOUR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_CHARGING_RATE_SOC_PER_HOUR</TriggerLabel>
+    <ControlPageLabel>EV_CHARGING_RATE_SOC_PER_HOUR</ControlPageLabel>
+</State>
+<State id="EV_RANGE_VSC_REGEN_ENERGY_FACTOR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_VSC_REGEN_ENERGY_FACTOR</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_VSC_REGEN_ENERGY_FACTOR</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER1_HOUR">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER1_HOUR</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER1_HOUR</ControlPageLabel>
+</State>
+<State id="CLIMATE_STATUS_TIMER1_MONTH">
+    <ValueType>String</ValueType>
+    <TriggerLabel>CLIMATE_STATUS_TIMER1_MONTH</TriggerLabel>
+    <ControlPageLabel>CLIMATE_STATUS_TIMER1_MONTH</ControlPageLabel>
+</State>
+<State id="TU_STATUS_SERIAL_NUMBER">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_SERIAL_NUMBER</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_SERIAL_NUMBER</ControlPageLabel>
+</State>
+<State id="TYRE_STATUS_REAR_RIGHT">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TYRE_STATUS_REAR_RIGHT</TriggerLabel>
+    <ControlPageLabel>TYRE_STATUS_REAR_RIGHT</ControlPageLabel>
+</State>
+<State id="EV_RANGE_ECOx10">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_ECOx10</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_ECOx10</ControlPageLabel>
+</State>
+<State id="EV_RANGE_GET_ME_HOMEx10">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_RANGE_GET_ME_HOMEx10</TriggerLabel>
+    <ControlPageLabel>EV_RANGE_GET_ME_HOMEx10</ControlPageLabel>
+</State>
+<State id="TU_ACTIVATION_STATUS">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_ACTIVATION_STATUS</TriggerLabel>
+    <ControlPageLabel>TU_ACTIVATION_STATUS</ControlPageLabel>
+</State>
+<State id="DOOR_BOOT_LOCK_STATUS">
+    <ValueType>Boolean</ValueType>
+    <TriggerLabel>DOOR_BOOT_LOCK_STATUS</TriggerLabel>
+    <ControlPageLabel>DOOR_BOOT_LOCK_STATUS</ControlPageLabel>
+</State>
+<State id="TU_STATUS_CAN">
+    <ValueType>String</ValueType>
+    <TriggerLabel>TU_STATUS_CAN</TriggerLabel>
+    <ControlPageLabel>TU_STATUS_CAN</ControlPageLabel>
+</State>
+        </States>
+
+        <UiDisplayStateId>deviceIsOnline</UiDisplayStateId>
+			
+	</Device>
+</Devices>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PluginConfig>
+	<Field id="InControlEmail" type="textfield">
+	<Label>Enter the email account for InControl:</Label>
+	</Field>
+	<Field id="InControlPassword" type="textfield" secure="true">
+	<Label>Enter the password for your InControl Account:</Label>
+	</Field>
+	<Field id="InControlPIN" type="textfield" secure="true">
+	<Label>Enter the PIN for the InControl App:</Label>
+	</Field>
+	<Field id="simpleseparator1" type="separator">
+	</Field>
+	<Field id="topLabel" type="label" fontSize="small" fontColor="darkgray">
+		<Label>If you are having problems with the plugin (or you are instructed by support), you can enable extra logging in the Event Log window by checking this button. Use with caution.</Label>
+	</Field>
+	<Field id="showDebugInfo" type="checkbox">
+	<Label>Enable debuging:</Label>
+	<Description>(not recommended)</Description>
+	</Field>
+	<Field id="simpleseparator2" type="separator">
+	</Field>
+	<Field id="midLabel" type="label" fontSize="small" fontColor="darkgray">
+		<Label>Polling frequency to Connect to the JLR Servers</Label>
+	</Field>
+	<Field id="pollingFrequency" type="textfield" defaultValue="60">
+	<Label>Enter Polling Frequency in Seconds:</Label>
+	</Field>
+	<Field id="midLabel2" type="label" fontSize="small" fontColor="darkgray">
+	<Label>Not sure if this is necessary but I see timeouts in the App</Label>
+	</Field>
+	<Field id="requeststimeout" type="textfield" defaultValue="1">
+	<Label>Enter timeout (seconds) for requests to the JLR API:</Label>
+	</Field>
+	<Field id="simpleseparator3" type="separator">
+	</Field>
+	<Field type="checkbox" id="useMapAPI" defaultValue="false">
+        <Label>Create Car Location Map:</Label>
+        <Description>Requires MapQuest API Key</Description>
+    </Field>
+	<Field id="mapAPIkey" type="textfield" visibleBindingId="useMapAPI" visibleBindingValue="true" >
+	<Label>Enter the API Key for MapQuest</Label>
+	</Field>
+</PluginConfig>
+ 

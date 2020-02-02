@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<Actions>
+	<Action id="HonkAndBlink" deviceFilter="self">
+		<Name>Honk and Blink</Name>
+		<CallbackMethod>honkAndBlink</CallbackMethod>
+		
+	</Action>
+	
+</Actions>
