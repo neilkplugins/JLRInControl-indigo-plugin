@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Devices>
 	<!-- Define some devices -->
-	<Device type="custom" id="JLRcar">
+	<Device type="relay" id="JLRcar">
 		<Name>Jaguar/Land Rover Car</Name>
 		<ConfigUI>
 			<Field id="CarID" type="menu" >
@@ -9,6 +9,11 @@
 			</Field>
 			<Field id="label" type="label" fontSize="small" fontColor="darkgray">
 				<Label>Select the vehicle number if the account has multiple cars. VIN sent to Indigo Log so you can identify the correct car</Label>
+			</Field>
+			<Field id="climateTemp" type="textfield">
+				<Label>Enter the default timed climate temperature </Label>
+			</Field>
+			<Field type="textfield" id="adjustedclimateTemp" hidden="true">
 			</Field>
 		</ConfigUI>
 		<States>
@@ -121,7 +126,7 @@
     <ControlPageLabel>EV_RANGE_ON_BATTERY_MILES</ControlPageLabel>
 </State>
 <State id="DOOR_IS_ALL_DOORS_LOCKED">
-    <ValueType>Boolean</ValueType>
+    <ValueType booltype="YesNo">Boolean</ValueType>
     <TriggerLabel>DOOR_IS_ALL_DOORS_LOCKED</TriggerLabel>
     <ControlPageLabel>DOOR_IS_ALL_DOORS_LOCKED</ControlPageLabel>
 </State>

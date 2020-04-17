@@ -41,5 +41,17 @@
 	<Field id="mapAPIkey" type="textfield" visibleBindingId="useMapAPI" visibleBindingValue="true" >
 	<Label>Enter the API Key for MapQuest</Label>
 	</Field>
+	<Field id="simpleseparator4" type="separator">
+	</Field>
+	<Field id="topLabel2" type="label" fontSize="small" fontColor="darkgray">
+		<Label>Units to use for Tyre Pressure Display (raw value is Kilopascal, UI value will be as defined here)</Label>
+	</Field>
+	￼<Field type="menu" id="pressureunit" defaultValue="item1">
+	<Label>Pressure Unit:</Label>
+	<List>
+		<Option value="Psi">Psi</Option>
+		<Option value="Bar">Bar</Option>
+	</List>
+</Field>
 </PluginConfig>
  

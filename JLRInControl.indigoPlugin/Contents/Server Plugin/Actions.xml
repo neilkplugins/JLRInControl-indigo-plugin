@@ -6,5 +6,29 @@
 		<CallbackMethod>honkAndBlink</CallbackMethod>
 		
 	</Action>
+	<Action id="StartCharge" deviceFilter="self">
+		<Name>Start Charging</Name>
+		<CallbackMethod>startCharge</CallbackMethod>
+		
+	</Action>
+	<Action id="StopCharge" deviceFilter="self">
+		<Name>Stop Charging</Name>
+		<CallbackMethod>stopCharge</CallbackMethod>
+		
+	</Action>
+	<Action id="StopClimate" deviceFilter="self">
+		<Name>Stop Climate</Name>
+		<CallbackMethod>stopClimate</CallbackMethod>
+	</Action>
+	<Action id="StartClimate" deviceFilter="self">
+	<Name>Start Climate</Name>
+	<ConfigUI>
+			<Field id="climatetemp" type="textfield" defaultValue="210" >
+			<Label>Target Temperature:(Centigrade x 10)</Label>
+			</Field>
+		</ConfigUI>
+		<CallbackMethod>startClimate</CallbackMethod>
+	</Action>
+	
 	
 </Actions>

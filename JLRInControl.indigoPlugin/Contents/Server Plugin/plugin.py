@@ -18,7 +18,8 @@ import jlrpy
 ################################################################################
 # Globals
 ################################################################################
-
+kpaInPSI = 0.145038
+kpaInBar = 0.01
 	####################################
 	#Validate Email Input - Simple checks form, not if it exists ToDo doesn't work
 	####################################
@@ -55,6 +56,7 @@ class Plugin(indigo.PluginBase):
     def deviceStartComm(self, device):
         self.debugLog("Starting device: " + device.name)
         self.debugLog(str(device.id)+ " " + device.name)
+        device.stateListOrDisplayStateIdChanged()
         if device.id not in self.deviceList:
             self.update(device)
             self.deviceList.append(device.id)
@@ -85,9 +87,13 @@ class Plugin(indigo.PluginBase):
 
     ########################################
     def update(self,device):
-    	c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
-    	#The Car ID from the device defintion maps to the relevant car if multiple cars on one account
-    	#Adjust for index starting at 0
+    	try:
+    		c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
+    		#The Car ID from the device defintion maps to the relevant car if multiple cars on one account
+    		#Adjust for index starting at 0
+    	except:
+    		indigo.server.log("Failed to Contact JLR In Control Servers")
+    		return()
     	vehicle_num = int(device.pluginProps['CarID'])-1
     	v = c.vehicles[vehicle_num]
     	device.updateStateOnServer('deviceIsOnline', value=True, uiValue="Starting")
@@ -126,6 +132,20 @@ class Plugin(indigo.PluginBase):
         		device_states.append({ 'key': d['key'], 'value' : d['value'] , 'uiValue' : uialarm })
         	elif d['key']=="EV_RANGE_VSC_REVISED_HV_BATT_ENERGYx100":
         		device_states.append({ 'key': d['key'], 'value' : d['value'] , 'uiValue' : (d['value']+' kWh')})
+        	elif "TYRE_PRESSURE" in d['key']:
+        		if self.pluginPrefs['pressureunit']=="Bar":
+        			convertedpressure = round(float(d['value']) * kpaInBar, 1)
+        			uipressure = str(convertedpressure) + " Bar"
+        		else:
+        			convertedpressure = round(float(d['value']) * kpaInPSI, 1)
+        			uipressure = str(convertedpressure) + " Psi"
+        		device_states.append({ 'key': d['key'], 'value' : d['value'] , 'uiValue' : uipressure })
+        	elif d['key']=="DOOR_IS_ALL_DOORS_LOCKED":
+        		if d['value']:
+        		    uilock="Locked"
+        		else:
+        			uilock="Unlocked"
+        		device_states.append({ 'key': d['key'], 'value' : d['value'] , 'uiValue' : uilock })
         	else:
         		device_states.append({ 'key': d['key'], 'value' : d['value'] })
         device_states.append({ 'key': 'modelYear' , 'value' : attributes['modelYear'] })
@@ -148,13 +168,17 @@ class Plugin(indigo.PluginBase):
         sizeandapikey = "&size=@2x&key="+self.pluginPrefs['mapAPIkey']
         mapurl = baseurl + locationsection + sizeandapikey
         #url = "https://www.mapquestapi.com/staticmap/v5/map?locations="+str(location['position']['latitude'])+","+str(location['position']['longitude'])+"&size=@2x&key="+self.pluginPrefs['mapAPIkey']
-        imagepath = "{}/IndigoWebServer/images/controls/static/carlocation.jpg".format(indigo.server.getInstallFolderPath())
+        imagepath = "{}/IndigoWebServer/images/controls/static/carlocation{}.jpg".format(indigo.server.getInstallFolderPath(),str(vehicle_num+1))
+        self.debugLog(imagepath)
         if self.pluginPrefs['useMapAPI']:
-        	r = requests.get(mapurl, timeout=0.5)
-        	if r.status_code == 200:
-        		with open(imagepath, 'wb') as f:
-        			f.write(r.content)
-        			self.debugLog("Writing Car Location Image")
+        	try:
+        		r = requests.get(mapurl, timeout=0.5)
+        		if r.status_code == 200:
+        			with open(imagepath, 'wb') as f:
+        				f.write(r.content)
+        				self.debugLog("Writing Car Location Image")
+        	except:
+        		indigo.server.log("Error writing Car Location Map Image")
         update_time = t.strftime("%m/%d/%Y at %H:%M")
         device_states.append({ 'key': 'deviceLastUpdated' , 'value' : update_time })
         #device.updateStateOnServer('deviceLastUpdated', value=update_time)
@@ -178,7 +202,10 @@ class Plugin(indigo.PluginBase):
     	self.debugLog(valuesDict)
     	vehicle_num = int(valuesDict['CarID'])-1
     	v = c.vehicles[vehicle_num]
+    	adjustedtemp = valuesDict['climateTemp']+"0"
         valuesDict['address'] = v['vin']
+        valuesDict['adjustedclimateTemp']=adjustedtemp
+        self.debugLog(valuesDict)
         return (True, valuesDict)
 
 
@@ -325,35 +352,109 @@ class Plugin(indigo.PluginBase):
     	self.debugLog("Honked and Blinked")
     	return()
         
+    def startCharge(self,pluginAction, dev):
+    	self.debugLog(dev)
+        c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
+    	#The Car ID from the device defintion maps to the relevant car if multiple cars on one account
+    	#Adjust for index starting at 0
+    	vehicle_num = int(dev.pluginProps['CarID'])-1
+    	v = c.vehicles[vehicle_num]
+    	v.charging_start()
+    	self.debugLog("Charge Started")
+    	return()
+    	
+    def stopCharge(self,pluginAction, dev):
+    	self.debugLog(dev)
+        c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
+    	#The Car ID from the device defintion maps to the relevant car if multiple cars on one account
+    	#Adjust for index starting at 0
+    	vehicle_num = int(dev.pluginProps['CarID'])-1
+    	v = c.vehicles[vehicle_num]
+    	v.charging_start()
+    	self.debugLog("Charge Stopped")
+    	return()
+    	
+    def stopClimate(self,pluginAction, dev):
+    	self.debugLog(dev)
+        c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
+    	#The Car ID from the device defintion maps to the relevant car if multiple cars on one account
+    	#Adjust for index starting at 0
+    	vehicle_num = int(dev.pluginProps['CarID'])-1
+    	v = c.vehicles[vehicle_num]
+    	v.preconditioning_stop()
+    	self.debugLog("Climate Stopped")
+    	return()
+    	
+    def startClimate(self,pluginAction, dev):
+    	self.debugLog(dev)
+        c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
+    	#The Car ID from the device defintion maps to the relevant car if multiple cars on one account
+    	#Adjust for index starting at 0
+    	vehicle_num = int(dev.pluginProps['CarID'])-1
+    	v = c.vehicles[vehicle_num]
+    	v.preconditioning_start(pluginAction.props.get('climatetemp'))
+    	self.debugLog("Climate Started at "+ pluginAction.props.get('climatetemp'))
+    	return()
+    	
+    ########################################
+    # Relay / Dimmer Action callback
+    ######################
     
     
-    ###### SET EFFECT WLED METHOD ######
-    def setEffect(self, pluginAction, dev):
-                self.debugLog(pluginAction)
-                newEffect = pluginAction.props.get("effectdescription")
-                effectIndex =dev.pluginProps["wledeffects"].index(newEffect)
-                self.debugLog("New Effect is "+newEffect+" with index number "+str(effectIndex))
-                jsondata = json.dumps({ "seg":[{"fx":effectIndex}]})
-                self.debugLog(jsondata)
-                try:
-                    wledeffectresponse = requests.post('http://'+ dev.pluginProps["ipaddress"] + theUrlBase,data=jsondata,timeout=float(self.pluginPrefs["requeststimeout"]))
-                    self.debugLog(wledeffectresponse)
-                    if wledeffectresponse.status_code == 200:
-                            sendSuccess = True
-                    else:
-                            sendSuccess = False
-                except:
-                    sendSuccess = False
+    def actionControlDevice(self, action, dev):
+        ###### TURN ON Timed Climate ######
+        if action.deviceAction == indigo.kDeviceAction.TurnOn:
+            jsondata = json.dumps({ "on": True})
+            try:
+            	c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
+            	#The Car ID from the device defintion maps to the relevant car if multiple cars on one account
+            	#Adjust for index starting at 0
+            	vehicle_num = int(dev.pluginProps['CarID'])-1
+            	v = c.vehicles[vehicle_num]
+            	v.preconditioning_start(dev.pluginProps['adjustedclimateTemp'])
+            	self.debugLog("Climate Started at "+ dev.pluginProps['adjustedclimateTemp'])
+            	sendSuccess = True    		
+            except:
+                sendSuccess = False
 
-#			sendSuccess = True		# Set to False if it failed.
-
-                if sendSuccess:
+            if sendSuccess:
                 # If success then log that the command was successfully sent.
-                    indigo.server.log(u"sent \"%s\" %s to %d which is %s" % (dev.name, "set effect", effectIndex, newEffect))
+                indigo.server.log(u"Turned Timed Climate \"%s\" %s" % (dev.name, "on"))
 
-                    # And then tell the Indigo Server to update the state:
-                    dev.updateStateOnServer("effect", effectIndex)
-                    dev.updateStateOnServer("effectname", dev.pluginProps["wledeffects"][effectIndex])
+                # And then tell the Indigo Server to update the state.
+                dev.updateStateOnServer("onOffState", True)
+            else:
+                # Else log failure but do NOT update state on Indigo Server.
+                indigo.server.log(u"Turning Timed Climate \"%s\" to %s failed" % (dev.name, "on"), isError=True)
+
+        ###### TURN OFF Timed Climate ######
+        elif action.deviceAction == indigo.kDeviceAction.TurnOff:
+            # Turn WLED off
+            jsondata = json.dumps({ "on": False})
+            try:
+            	c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
+            	#The Car ID from the device defintion maps to the relevant car if multiple cars on one account
+            	#Adjust for index starting at 0
+            	vehicle_num = int(dev.pluginProps['CarID'])-1
+            	v = c.vehicles[vehicle_num]
+            	v.preconditioning_stop()
+            	self.debugLog("Climate Stopped")
+            	sendSuccess = True
+            except:
+                        sendSuccess = False
+
+            if sendSuccess:
+                # If success then log that the command was successfully sent.
+                indigo.server.log(u"sent \"%s\" %s" % (dev.name, "off"))
+
+                # And then tell the Indigo Server to update the state:
+                dev.updateStateOnServer("onOffState", False)
+            else:
+                # Else log failure but do NOT update state on Indigo Server.
+                indigo.server.log(u"send \"%s\" %s failed" % (dev.name, "off"), isError=True)
 
 
-   
+        ###### TOGGLE ######
+        elif action.deviceAction == indigo.kDeviceAction.Toggle:
+            # Toggle the WLED
+            self.debugLog("Device for Timed Climate does not support toggle")
