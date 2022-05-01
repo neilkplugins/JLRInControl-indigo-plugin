@@ -23,7 +23,7 @@ kpaInBar = 0.01
 	####################################
 	#Validate Email Input - Simple checks form, not if it exists ToDo doesn't work
 	####################################
-	
+
 # def invalid_email(email_address):
 # 	a=0
 # 	y=len(email_address)
@@ -72,7 +72,10 @@ class Plugin(indigo.PluginBase):
     ########################################
     def runConcurrentThread(self):
         self.debugLog("Starting concurrent thread")
-        pollingFreq = int(self.pluginPrefs['pollingFrequency'])
+        try:
+            pollingFreq = int(self.pluginPrefs['pollingFrequency'])
+        except:
+            pollingFreq = 60
         try:
             while True:
                 # we sleep (by a user defined amount, default 60s) first because when the plugin starts, each device
@@ -168,7 +171,7 @@ class Plugin(indigo.PluginBase):
         sizeandapikey = "&size=@2x&key="+self.pluginPrefs['mapAPIkey']
         mapurl = baseurl + locationsection + sizeandapikey
         #url = "https://www.mapquestapi.com/staticmap/v5/map?locations="+str(location['position']['latitude'])+","+str(location['position']['longitude'])+"&size=@2x&key="+self.pluginPrefs['mapAPIkey']
-        imagepath = "{}/IndigoWebServer/images/controls/static/carlocation{}.jpg".format(indigo.server.getInstallFolderPath(),str(vehicle_num+1))
+        imagepath = "{}/Web Assets/images/controls/static/carlocation{}.jpg".format(indigo.server.getInstallFolderPath(),str(vehicle_num+1))
         self.debugLog(imagepath)
         if self.pluginPrefs['useMapAPI']:
         	try:
@@ -209,7 +212,7 @@ class Plugin(indigo.PluginBase):
         return (True, valuesDict)
 
 
-	
+
     ########################################
     # UI Validate, Plugin Preferences
     ########################################
@@ -219,6 +222,11 @@ class Plugin(indigo.PluginBase):
 #     		errorsDict = indigo.Dict()
 #     		errorsDict['InControlEmail'] = "Invalid email address for JLR InControl"
 #     		return (False, valuesDict, errorsDict)
+        if not(valuesDict['InControlEmail']):
+        	self.errorLog("Email Cannot Be Empty")
+        	errorsDict = indigo.Dict()
+        	errorsDict['InControlEmail'] = "Password Cannot Be Empty"
+        	return (False, valuesDict, errorsDict)
         if not(valuesDict['InControlPassword']):
         	self.errorLog("Password Cannot Be Empty")
         	errorsDict = indigo.Dict()
@@ -307,12 +315,12 @@ class Plugin(indigo.PluginBase):
             indigo.server.log("Turning on debug logging")
             self.pluginPrefs["showDebugInfo"] = True
         self.debug = not self.debug
-        
-        
+
+
     ########################################
     # Method to populate vehicle list for device configuration menu
-    ########################################    
-    
+    ########################################
+
     def genVehicleList(self, filter, valuesDict, typeId, devID):
         device = indigo.devices[devID]
         try:
@@ -339,8 +347,11 @@ class Plugin(indigo.PluginBase):
         	indigo.server.log( "For menu number " + str(index+1) + " VIN is " + vehiclelist[index]['vin'])
         indigo.server.log("VIN Can be found on the assistance tab of the InControl App")
         return  vid
-  
-    
+
+  	########################################
+    # Action Methods
+    ########################################
+
     def honkAndBlink(self,pluginAction, dev):
     	self.debugLog(dev)
         c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
@@ -351,7 +362,7 @@ class Plugin(indigo.PluginBase):
     	v.honk_blink()
     	self.debugLog("Honked and Blinked")
     	return()
-        
+
     def startCharge(self,pluginAction, dev):
     	self.debugLog(dev)
         c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
@@ -362,7 +373,7 @@ class Plugin(indigo.PluginBase):
     	v.charging_start()
     	self.debugLog("Charge Started")
     	return()
-    	
+
     def stopCharge(self,pluginAction, dev):
     	self.debugLog(dev)
         c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
@@ -373,7 +384,7 @@ class Plugin(indigo.PluginBase):
     	v.charging_start()
     	self.debugLog("Charge Stopped")
     	return()
-    	
+
     def stopClimate(self,pluginAction, dev):
     	self.debugLog(dev)
         c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
@@ -384,7 +395,7 @@ class Plugin(indigo.PluginBase):
     	v.preconditioning_stop()
     	self.debugLog("Climate Stopped")
     	return()
-    	
+
     def startClimate(self,pluginAction, dev):
     	self.debugLog(dev)
         c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
@@ -395,12 +406,12 @@ class Plugin(indigo.PluginBase):
     	v.preconditioning_start(pluginAction.props.get('climatetemp'))
     	self.debugLog("Climate Started at "+ pluginAction.props.get('climatetemp'))
     	return()
-    	
+
     ########################################
     # Relay / Dimmer Action callback
     ######################
-    
-    
+
+
     def actionControlDevice(self, action, dev):
         ###### TURN ON Timed Climate ######
         if action.deviceAction == indigo.kDeviceAction.TurnOn:
@@ -413,7 +424,7 @@ class Plugin(indigo.PluginBase):
             	v = c.vehicles[vehicle_num]
             	v.preconditioning_start(dev.pluginProps['adjustedclimateTemp'])
             	self.debugLog("Climate Started at "+ dev.pluginProps['adjustedclimateTemp'])
-            	sendSuccess = True    		
+            	sendSuccess = True
             except:
                 sendSuccess = False
 
@@ -429,7 +440,6 @@ class Plugin(indigo.PluginBase):
 
         ###### TURN OFF Timed Climate ######
         elif action.deviceAction == indigo.kDeviceAction.TurnOff:
-            # Turn WLED off
             jsondata = json.dumps({ "on": False})
             try:
             	c = jlrpy.Connection(self.pluginPrefs['InControlEmail'], self.pluginPrefs['InControlPassword'])
@@ -456,5 +466,5 @@ class Plugin(indigo.PluginBase):
 
         ###### TOGGLE ######
         elif action.deviceAction == indigo.kDeviceAction.Toggle:
-            # Toggle the WLED
+            # Toggle the Climate
             self.debugLog("Device for Timed Climate does not support toggle")

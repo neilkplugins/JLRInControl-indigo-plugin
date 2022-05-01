@@ -885,6 +885,11 @@
     <TriggerLabel>TU_STATUS_CAN</TriggerLabel>
     <ControlPageLabel>TU_STATUS_CAN</ControlPageLabel>
 </State>
+<State id="EV_ONE_OFF_MAX_VALUE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_ONE_OFF_MAX_VALUE</TriggerLabel>
+    <ControlPageLabel>EV_ONE_OFF_MAX_VALUE</ControlPageLabel>
+</State>
         </States>
 
         <UiDisplayStateId>deviceIsOnline</UiDisplayStateId>
