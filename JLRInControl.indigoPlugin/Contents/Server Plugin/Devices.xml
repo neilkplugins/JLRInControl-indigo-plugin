@@ -285,6 +285,11 @@
     <TriggerLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD7</TriggerLabel>
     <ControlPageLabel>EV_RANGE_VSC_HV_BATTERY_CONSUMPTION_SPD7</ControlPageLabel>
 </State>
+      State id="EV_ONE_OFF_MAX_VALUE">
+    <ValueType>String</ValueType>
+    <TriggerLabel>EV_ONE_OFF_MAX_VALUE</TriggerLabel>
+    <ControlPageLabel>EV_ONE_OFF_MAX_VALUE</ControlPageLabel>
+</State>
 <State id="TYRE_STATUS_REAR_LEFT">
     <ValueType>String</ValueType>
     <TriggerLabel>TYRE_STATUS_REAR_LEFT</TriggerLabel>
