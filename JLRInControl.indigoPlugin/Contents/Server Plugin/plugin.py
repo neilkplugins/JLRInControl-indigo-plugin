@@ -102,6 +102,9 @@ class Plugin(indigo.PluginBase):
         user_info = c.get_user_info()
         status = v.get_status()['vehicleStatus']['coreStatus']
         self.debugLog(status)
+        self.debugLog("and the second one ------------")
+        evstatus = v.get_status()['vehicleStatus']['evStatus']
+        self.debugLog(evstatus)
         attributes = v.get_attributes()
         location = v.get_position()
         # reverse geocode call appears to be broken in jlpr
@@ -112,6 +115,25 @@ class Plugin(indigo.PluginBase):
         device_states = []
         # Update Vehicle Status
         #for d in v.get_status()['vehicleStatus']:
+        for d in evstatus:
+            if d['key'] == 'EV_STATE_OF_CHARGE':
+                device_states.append({'key': d['key'], 'value': d['value'], 'uiValue': (d['value'] + '%')})
+            elif d['key'] == "EV_CHARGING_RATE_SOC_PER_HOUR":
+                device_states.append({'key': d['key'], 'value': d['value'], 'uiValue': (d['value'] + '%')})
+            elif d['key'] == "EV_MINUTES_TO_FULLY_CHARGED":
+                hours = '{:02d}:{:02d}m'.format(*divmod(int(d['value']), 60))
+                device_states.append({'key': d['key'], 'value': d['value'], 'uiValue': hours})
+            elif d['key'] == "EV_CHARGING_STATUS":
+                if d['value'] == "No Message":
+                    uicharge = "Not Connected"
+                else:
+                    uicharge = d['value']
+                    device_states.append({'key': d['key'], 'value': d['value'], 'uiValue': uicharge})
+            elif d['key'] == "EV_RANGE_VSC_REVISED_HV_BATT_ENERGYx100":
+                device_states.append({'key': d['key'], 'value': d['value'], 'uiValue': (d['value'] + ' kWh')})
+            else:
+                device_states.append({'key': d['key'], 'value': d['value']})
+
         for d in status:
             if d['key'] == 'EV_STATE_OF_CHARGE':
                  device_states.append({'key': d['key'], 'value': d['value'], 'uiValue': (d['value'] + '%')})
