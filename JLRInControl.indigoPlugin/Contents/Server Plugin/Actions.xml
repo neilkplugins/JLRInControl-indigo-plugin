@@ -1,26 +1,26 @@
 <?xml version="1.0"?>
 
 <Actions>
-	<Action id="HonkAndBlink" deviceFilter="self" uiPath="DeviceActions">
+	<Action id="HonkAndBlink" deviceFilter="self">
 		<Name>Honk and Blink</Name>
 		<CallbackMethod>honkAndBlink</CallbackMethod>
 		
 	</Action>
-	<Action id="StartCharge" deviceFilter="self" uiPath="DeviceActions">
+	<Action id="StartCharge" deviceFilter="self">
 		<Name>Start Charging</Name>
 		<CallbackMethod>startCharge</CallbackMethod>
 		
 	</Action>
-	<Action id="StopCharge" deviceFilter="self" uiPath="DeviceActions">
+	<Action id="StopCharge" deviceFilter="self">
 		<Name>Stop Charging</Name>
 		<CallbackMethod>stopCharge</CallbackMethod>
 		
 	</Action>
-	<Action id="StopClimate" deviceFilter="self" uiPath="DeviceActions">
+	<Action id="StopClimate" deviceFilter="self">
 		<Name>Stop Climate</Name>
 		<CallbackMethod>stopClimate</CallbackMethod>
 	</Action>
-	<Action id="StartClimate" deviceFilter="self" uiPath="DeviceActions">
+	<Action id="StartClimate" deviceFilter="self">
 	<Name>Start Climate</Name>
 	<ConfigUI>
 			<Field id="climatetemp" type="textfield" defaultValue="210" >
